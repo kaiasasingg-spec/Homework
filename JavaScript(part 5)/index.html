@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Реверс речення</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card">
+    <h1>РЕВЕРС РЕЧЕННЯ</h1>
+    <p class="subtitle">// вводь текст — отримай його навпаки</p>
+
+    <label for="inputText">Введіть речення</label>
+    <input type="text" id="inputText" placeholder="Напишіть щось тут..." />
+
+    <button onclick="reverse()">Перевернути</button>
+
+    <div class="result-wrap" id="resultWrap">
+      <p class="result-label">Результат</p>
+      <p id="output"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
