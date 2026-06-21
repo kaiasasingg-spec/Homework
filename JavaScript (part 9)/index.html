@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Облік автомобілів</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Облік автомобілів автосалону</h1>
+
+        <form id="carForm">
+            <input type="text" id="brand" placeholder="Марка автомобіля">
+            <input type="text" id="model" placeholder="Модель автомобіля">
+            <input type="number" id="year" placeholder="Рік випуску">
+            <input type="number" id="price" placeholder="Ціна">
+            <button type="submit">Додати автомобіль</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Марка</th>
+                    <th>Модель</th>
+                    <th>Рік випуску</th>
+                    <th>Ціна</th>
+                    <th>Дія</th>
+                </tr>
+            </thead>
+            <tbody id="carTable"></tbody>
+        </table>
+
+        <p id="totalCars">Загальна кількість автомобілів: 0</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
