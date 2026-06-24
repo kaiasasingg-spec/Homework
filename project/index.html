@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бібліотека книг</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="shelf-bg" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="head-inner">
+    <p class="eyebrow">Домашній каталог</p>
+    <h1 class="title">Бібліотека книг</h1>
+    <p class="subtitle">Записуй кожну книгу, яка стоїть на полиці</p>
+  </div>
+  <div class="spine-row" aria-hidden="true">
+    <span class="spine s1"></span>
+    <span class="spine s2"></span>
+    <span class="spine s3"></span>
+    <span class="spine s4"></span>
+    <span class="spine s5"></span>
+    <span class="spine s6"></span>
+    <span class="spine s7"></span>
+  </div>
+</header>
+
+<main class="layout">
+
+  <section class="card form-card" aria-labelledby="form-heading">
+    <h2 id="form-heading" class="card-title">Нова картка книги</h2>
+    <form id="book-form" novalidate>
+      <div class="field">
+        <label for="title">Назва</label>
+        <input type="text" id="title" name="title" placeholder="Напр. Вторая родина" autocomplete="off">
+        <span class="field-error" id="error-title"></span>
+      </div>
+
+      <div class="field">
+        <label for="author">Автор</label>
+        <input type="text" id="author" name="author" placeholder="Напр. Жюль Верн" autocomplete="off">
+        <span class="field-error" id="error-author"></span>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="year">Рік видання</label>
+          <input type="text" id="year" name="year" placeholder="Напр. 1900" inputmode="numeric" autocomplete="off">
+          <span class="field-error" id="error-year"></span>
+        </div>
+
+        <div class="field">
+          <label for="pages">Сторінок</label>
+          <input type="text" id="pages" name="pages" placeholder="Напр. 200" inputmode="numeric" autocomplete="off">
+          <span class="field-error" id="error-pages"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="genre">Жанр</label>
+        <select id="genre" name="genre">
+          <option value="Художня література">Художня література</option>
+          <option value="Поезія">Поезія</option>
+          <option value="Наукова література">Наукова література</option>
+          <option value="Історія">Історія</option>
+          <option value="Фантастика">Фантастика</option>
+          <option value="Біографія">Біографія</option>
+          <option value="Інше">Інше</option>
+        </select>
+      </div>
+
+      <div class="field checkbox-field">
+        <label class="checkbox-label">
+          <input type="checkbox" id="isRead" name="isRead">
+          <span>Вже прочитана</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="add-book-btn">Додати книгу</button>
+    </form>
+  </section>
+
+  <section class="card library-card" aria-labelledby="library-heading">
+    <div class="library-head">
+      <h2 id="library-heading" class="card-title">Полиця</h2>
+      <div class="search-wrap">
+        <input type="text" id="search-input" placeholder="Пошук за назвою…" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="books-table">
+        <thead>
+          <tr>
+            <th>Назва</th>
+            <th>Автор</th>
+            <th>Рік</th>
+            <th>Жанр</th>
+            <th>Стор.</th>
+            <th>Статус</th>
+            <th>Додано</th>
+            <th aria-label="Дії"></th>
+          </tr>
+        </thead>
+        <tbody id="books-tbody">
+        </tbody>
+      </table>
+      <p class="empty-state" id="empty-state" hidden>Тут поки порожньо. Додай першу книгу зліва - вона з'явиться на полиці</p>
+    </div>
+
+    <div class="stats-row" id="stats-row">
+      <div class="stat">
+        <span class="stat-value" id="stat-total">0</span>
+        <span class="stat-label">усього книг</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="stat-read">0</span>
+        <span class="stat-label">прочитано</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="stat-unread">0</span>
+        <span class="stat-label">в очікуванні</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="card server-card" aria-labelledby="server-heading">
+    <div class="server-head">
+      <div>
+        <h2 id="server-heading" class="card-title">Стрічка з мережі</h2>
+        <p class="card-hint">Тестовий запит до jsonplaceholder — щоб перевірити Fetch API.</p>
+      </div>
+      <button type="button" class="btn btn-secondary" id="load-books-btn">Завантажити книги</button>
+    </div>
+    <p class="loading-msg" id="loading-msg" hidden>Завантаження книг…</p>
+    <div class="table-wrap">
+      <table class="posts-table" id="posts-table" hidden>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Заголовок</th>
+          </tr>
+        </thead>
+        <tbody id="posts-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <p>Дані зберігаються лише у вашому браузері (localStorage). Нічого не йде на сервер.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
